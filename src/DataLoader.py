@@ -131,6 +131,8 @@ class ShootingsDataLoader:
         else:
             raise ValueError(f'Unexpected value for gender: "{gender}" ({type(gender)})')
 
+    RACE_FULL_NAMES = ['White', 'Black', 'Asian', 'Native American', 'Hispanic']
+
     RACE = {
         'W': 0,
         'B': 1,

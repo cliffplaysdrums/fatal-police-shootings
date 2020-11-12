@@ -4,6 +4,9 @@ from src.Cenus2019 import Census2019
 from bokeh.plotting import figure, output_file, show, ColumnDataSource
 from bokeh.transform import factor_cmap
 from bokeh.palettes import Spectral5
+import os
+
+PATH_TO_PLOTS = os.path.join(os.path.dirname(__file__), '..', 'plots')
 
 
 def plot_shootings(df, total=False):
@@ -20,10 +23,12 @@ def plot_shootings(df, total=False):
         source = ColumnDataSource(data=dict(race=race_names, counts=counts))
         title = 'Fatal Shootings by Race (total)'
         range_end = int(max(counts) * 1.15)
+        output_file(os.path.join(PATH_TO_PLOTS, 'total-fatal-shootings.html'))
     else:
         source = ColumnDataSource(data=dict(race=race_names, counts=per_million))
         title = 'Fatal Shootings by Race (per million)'
         range_end = int(max(per_million) * 1.15)
+        output_file(os.path.join(PATH_TO_PLOTS, 'fatal-shootings-per-million.html'))
 
     p = figure(title=title, x_range=race_names, toolbar_location=None)
     p.vbar(x='race', top='counts', source=source, legend_field='race',
